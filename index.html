@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Shortener BY Juliarta & Yudhiastara</title>
+    <link rel="stylesheet" href="output.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body class="font-poppins">
+    <div>
+        <div class="container mx-auto min-h-screen py-14">
+            <div class="max-w-xl border-2 border-primary w-full rounded-xl overflow-hidden mx-auto">
+                <div class="grid grid-cols-3">
+                    <button id="show-content-shortener" onclick="showShortener()" type="button" class="hover:bg-primary hover:text-white border-r-2 border-b-2 border-primary duration-300 py-2 px-8 bg-primary w-full text-white">Shortener</button>
+                    <button id="show-content-get-info-link" onclick="showGetInfo()" type="button" class="hover:bg-primary hover:text-white border-b-2 border-r-2 border-primary duration-300 py-2 px-8 bg-white w-full">Get Info</button>
+                    <button id="show-content-qr-code" onclick="showToQRCode()" type="button" class="hover:bg-primary hover:text-white border-b-2 border-primary duration-300 py-2 px-8 bg-white w-full">To QR Code</button>
+                </div>
+                <div class="p-5">
+                    <section id="content-shortener" class="flex flex-col items-center justify-center">
+                        <h1 class="uppercase text-2xl font-bold">Link Shortener</h1>
+                        <div class="w-full mt-2">
+                            <input type="text" name="link" id="link" placeholder="Masukkan link anda" class="px-5 py-2 rounded-md w-full border-2 border-primary">
+                            <button id="create-btn" type="button" class="hover:bg-yellow-600 duration-300 py-2 px-8 rounded-md bg-primary mt-2 w-full text-white">Shortener Sekarang</button>
+                        </div>
+                        <div class="w-full mt-5 hidden" id="content-hasil-shortener">
+                            <h2 class="text-lg font-semibold text-center mb-1 uppercase">Hasil Shortener</h2>
+                            <div class="flex items-center justify-center border-2 border-primary rounded-lg p-0">
+                                <input type="text" readonly disabled="true" id="hasil-shortener" placeholder="Hasil" value="Hasil" class="px-5 py-2 rounded-l-md w-full focus:outline-none disabled:bg-slate-50">
+                                <button onclick="copyHasilShortener()" type="button" class="hover:bg-yellow-600 duration-300 py-2 px-4 rounded-r-md w-max bg-primary text-white">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="content-get-info-link" class="flex-col items-center justify-center hidden">
+                        <h1 class="uppercase text-2xl font-bold">Get Info Link Shortener</h1>
+                        <div class="w-full mt-2">
+                            <input type="text" name="id-link" id="id-link" placeholder="Masukkan link shortener" class="px-5 py-2 rounded-md w-full border-2 border-primary">
+                            <h3 class="font-medium text-green-600 max-w-full" id="hasil-get-info-link"></h3>
+                            <button id="get-info-link-btn" type="button" class="hover:bg-yellow-600 duration-300 py-2 px-8 rounded-md bg-primary mt-2 w-full text-white">Get Info</button>
+                        </div>
+                    </section>
+                    <section id="content-qr-code" class="flex-col items-center justify-center hidden">
+                        <h1 class="uppercase text-2xl font-bold">Convert To QR Code</h1>
+                        <div class="w-full mt-2">
+                            <input type="text" name="id-link-to-qr" id="id-link-to-qr" placeholder="Masukkan link shortener" class="px-5 py-2 rounded-md w-full border-2 border-primary">
+                            <button id="link-to-qr-btn" onclick="makeCode()" type="button" class="hover:bg-yellow-600 duration-300 py-2 px-8 rounded-md bg-primary mt-2 w-full text-white">Generate</button>
+                        </div>
+                        <div class="hidden" id="hasil-qr-code-container">
+                            <div class="p-5" id="qr-code-container">
+                                <div id="qrcode"></div>
+                            </div>
+                            <button id="download-qr-code" onclick="downloadQRCode()" type="button" class="hover:bg-yellow-600 duration-300 py-2 px-8 rounded-md bg-primary mt-2 w-full text-white">Download</button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-10 gap-3">
+                <div class="rounded-xl border-2 border-primary p-5">
+                    <h1 class="text-lg text-center font-semibold">Lorem ipsum dolor sit.</h1>
+                    <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis voluptatem, tenetur obcaecati quia tempore quasi.</p>
+                </div>
+                <div class="rounded-xl border-2 border-primary p-5">
+                    <h1 class="text-lg text-center font-semibold">Lorem ipsum dolor sit.</h1>
+                    <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis voluptatem, tenetur obcaecati quia tempore quasi.</p>
+                </div>
+                <div class="rounded-xl border-2 border-primary p-5 col-span-1 sm:col-span-2 md:col-span-1">
+                    <h1 class="text-lg text-center font-semibold">Lorem ipsum dolor sit.</h1>
+                    <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis voluptatem, tenetur obcaecati quia tempore quasi.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="py-4 text-gray-500 border-t-2 border-gray-100 bg-gray-50 text-center">&copy; Juliarta & Yudhiastara 2024</footer>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://kit.fontawesome.com/4a76f15280.js" crossorigin="anonymous"></script>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSyD2M5qp6pjuVBELqg1XqrsP7RkBT7bBAjo",
+      authDomain: "linkshortener-69eaa.firebaseapp.com",
+      projectId: "linkshortener-69eaa",
+      storageBucket: "linkshortener-69eaa.firebasestorage.app",
+      messagingSenderId: "105649445034",
+      appId: "1:105649445034:web:4bc733a4950bc0dca858d3",
+      measurementId: "G-CRVSSQC3ER"
+    };
+  
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    function createUniqueId() {
+        return `${Math.random().toString(36).substr(2, 9)}`;
+    }
+
+    import { getDatabase, ref, child, get, set, update } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+
+    const db = getDatabase();
+
+    const linkInput = document.getElementById("link");
+    const createButton = document.getElementById("create-btn");
+    const contentHasilShortener = document.getElementById("content-hasil-shortener");
+    const hasilShortener = document.getElementById("hasil-shortener");
+
+    let uniqueId;
+    function addData() {
+        uniqueId = createUniqueId();
+        set(ref(db, 'Shorteners/' + uniqueId), {
+                link: linkInput.value,
+                visit: 0
+        })
+        .then(() => {
+            Swal.fire({
+                title: "Berhasil!",
+                text: "Link berhasil di shorter",
+                icon: "success"
+            });
+            contentHasilShortener.classList.remove("hidden");
+            hasilShortener.value = window.location.origin + '/' + uniqueId;
+        })
+        .catch((err) => {
+            Swal.fire({
+                title: "Terjadi Kesalahan!",
+                text: "Link gagal di shorter",
+                icon: "error"
+            });
+            console.log(err);
+        })
+    }
+    createButton.addEventListener("click", addData);
+
+    async function getData(id) {
+        const dbRef = ref(db);
+        
+        try {
+            const snapshot = await get(child(dbRef, 'Shorteners/' + id));
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                return {
+                    status: true,
+                    link: data.link,
+                    visit: data.visit
+                };
+            } else {
+                return { status: false };
+            }
+        } catch (err) {
+            console.log(err);
+            return { status: false };
+        }
+    }
+
+    function updateVisitData(id, currentVisit) {
+        update(ref(db, 'Shorteners/' + id), {
+            visit: currentVisit + 1
+        })
+        .then(() => {
+            console.log("Update success");
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
+
+
+    function getIdLink(url) {
+        if(url) {
+            try {
+                const pathSegments = new URL(url).pathname.split("/");
+                const valueAfterFirstSlash = pathSegments[1];
+                return valueAfterFirstSlash;
+            } catch (error) {
+                console.error("Invalid URL:", error);
+                return null;
+            }
+        }
+    }
+
+    const idLinkInput = document.getElementById("id-link");
+    const getInfoLinkBtn = document.getElementById("get-info-link-btn");
+    const hasilGetInfo = document.getElementById("hasil-get-info-link");
+
+    async function getInfoLink(id) {
+        try {
+            const res = await getData(id);
+            if (res && res.status) {
+                hasilGetInfo.innerHTML = `Link: ${res.link}<br>Visit: ${res.visit}`;
+            } else {
+                Swal.fire({
+                    title: "Error",
+                    text: "Link tidak ditemukan!",
+                    icon: "error"
+                });
+            }
+        } catch (error) {
+            Swal.fire({
+                title: "Error",
+                text: "Terjadi kesalahan saat mengambil data!",
+                icon: "error"
+            });
+        }
+    }
+
+    getInfoLinkBtn.addEventListener("click", function() {
+        const id = getIdLink(idLinkInput.value);
+        if (id) {
+            getInfoLink(id);
+        } else {
+            Swal.fire({
+                title: "Invalid Link",
+                text: "Link yang dimasukkan tidak valid!",
+                icon: "error"
+            });
+        }
+    });
+
+    function redirectTo404() {
+        window.location.href = '/404.html';
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        const path = window.location.pathname;
+        console.log("Path:", path);
+        
+        if (path === "/" || path === "/index.html") {
+            console.log("Tampilkan halaman index.html");
+            return;
+        }
+        
+        const slug = path.slice(1);
+        try {
+            const res = await getData(slug);
+            if (res && res.status) {
+                window.location.href = res.link;
+            } else {
+                redirectTo404();
+            }
+        } catch (error) {
+            Swal.fire({
+                title: "Error",
+                text: "Terjadi kesalahan saat mengambil data!",
+                icon: "error"
+            });
+        }
+    });
+  </script>
+  <script src="html2canvas.min.js"></script>
+  <script src="qrcode.min.js"></script>
+  <script src="script.js"></script>
+</html>

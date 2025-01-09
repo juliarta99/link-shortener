@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#hasil-get-info-link {
+    word-wrap: break-word; /* Membungkus kata yang panjang */
+    word-break: break-word; /* Memecah kata yang terlalu panjang */
+    overflow-wrap: break-word; /* Menjamin kata panjang terbungkus */
+    max-width: 100%; /* Membatasi lebar maksimal teks */
+}

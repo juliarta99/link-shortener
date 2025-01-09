@@ -6,7 +6,6 @@ const contentGetInfo = document.getElementById("content-get-info-link");
 const contentQRCode = document.getElementById("content-qr-code");
 
 function updateContentAndButtons(activeContent, activeButton, allContents, allButtons) {
-    // Update content visibility
     allContents.forEach(content => {
         if (content === activeContent) {
             content.classList.add("flex");
@@ -17,7 +16,6 @@ function updateContentAndButtons(activeContent, activeButton, allContents, allBu
         }
     });
 
-    // Update button styles
     allButtons.forEach(button => {
         if (button === activeButton) {
             button.classList.add("bg-primary", "text-white");

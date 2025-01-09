@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Link Shortener BY Juliarta & Yudhiastara</title>
-    <link rel="stylesheet" href="output.css">
+    <link rel="stylesheet" href="src/output.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -16,7 +16,7 @@
                 <div class="grid grid-cols-3">
                     <button id="show-content-shortener" onclick="showShortener()" type="button" class="hover:bg-primary hover:text-white border-r-2 border-b-2 border-primary duration-300 py-2 px-8 bg-primary w-full text-white">Shortener</button>
                     <button id="show-content-get-info-link" onclick="showGetInfo()" type="button" class="hover:bg-primary hover:text-white border-b-2 border-r-2 border-primary duration-300 py-2 px-8 bg-white w-full">Get Info</button>
-                    <button id="show-content-qr-code" onclick="showToQRCode()" type="button" class="hover:bg-primary hover:text-white border-b-2 border-primary duration-300 py-2 px-8 bg-white w-full">To QR Code</button>
+                    <button id="show-content-qr-code" onclick="showToQRCode()" type="button" class="hover:bg-primary hover:text-white border-b-2 border-primary duration-300 py-2 px-8 bg-white w-full">Generate QR Code</button>
                 </div>
                 <div class="p-5">
                     <section id="content-shortener" class="flex flex-col items-center justify-center">
@@ -91,7 +91,6 @@
       appId: "1:105649445034:web:4bc733a4950bc0dca858d3",
       measurementId: "G-CRVSSQC3ER"
     };
-  
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
 
@@ -130,7 +129,7 @@
                 text: "Link gagal di shorter",
                 icon: "error"
             });
-            console.log(err);
+            // console.log(err);
         })
     }
     createButton.addEventListener("click", addData);
@@ -151,7 +150,7 @@
                 return { status: false };
             }
         } catch (err) {
-            console.log(err);
+            // console.log(err);
             return { status: false };
         }
     }
@@ -161,10 +160,12 @@
             visit: currentVisit + 1
         })
         .then(() => {
-            console.log("Update success");
+            return { status: true };
+            // console.log("Update success");
         })
         .catch((err) => {
-            console.log(err);
+            return { status: false };
+            // console.log(err);
         })
     }
 
@@ -226,10 +227,9 @@
 
     document.addEventListener("DOMContentLoaded", async () => {
         const path = window.location.pathname;
-        console.log("Path:", path);
+        // console.log("Path:", path);
         
         if (path === "/" || path === "/index.html") {
-            console.log("Tampilkan halaman index.html");
             return;
         }
         
@@ -237,7 +237,24 @@
         try {
             const res = await getData(slug);
             if (res && res.status) {
-                window.location.href = res.link;
+                try {
+                    const resUpdate = await updateVisitData(slug, res.visit);
+                    if(res && res.status) {
+                        window.location.href = res.link;
+                    } else {
+                        Swal.fire({
+                            title: "Error",
+                            text: "Terjadi kesalahan saat mengambil data!",
+                            icon: "error"
+                        });
+                    }
+                } catch (error) {
+                    Swal.fire({
+                        title: "Error",
+                        text: "Terjadi kesalahan saat mengambil data!",
+                        icon: "error"
+                    });
+                }
             } else {
                 redirectTo404();
             }
@@ -250,7 +267,7 @@
         }
     });
   </script>
-  <script src="html2canvas.min.js"></script>
-  <script src="qrcode.min.js"></script>
-  <script src="script.js"></script>
+  <script src="src/libs/html2canvas.min.js"></script>
+  <script src="src/libs/qrcode.min.js"></script>
+  <script src="src/script.js"></script>
 </html>

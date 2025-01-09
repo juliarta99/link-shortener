@@ -10,8 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body class="font-poppins">
+    <div id="loading" class="w-full h-screen items-center justify-center fixed z-50 bg-white top-0 left-0 hidden">
+        <div class="loader"></div>
+    </div>
     <div>
-        <div class="container mx-auto min-h-screen py-14">
+        <div class="container mx-auto min-h-screen py-10">
+            <h1 class="text-4xl text-primary text-center font-bold mb-2">ShortLink JY</h1>
             <div class="max-w-xl border-2 border-primary w-full rounded-xl overflow-hidden mx-auto">
                 <div class="grid grid-cols-3">
                     <button id="show-content-shortener" onclick="showShortener()" type="button" class="hover:bg-primary hover:text-white border-r-2 border-b-2 border-primary duration-300 py-2 px-8 bg-primary w-full text-white">Shortener</button>
@@ -23,6 +27,7 @@
                         <h1 class="uppercase text-2xl font-bold">Link Shortener</h1>
                         <div class="w-full mt-2">
                             <input type="text" name="link" id="link" placeholder="Masukkan link anda" class="px-5 py-2 rounded-md w-full border-2 border-primary">
+                            <input type="text" name="customize" id="customize" placeholder="Masukkan akhiran link, jika ingin sesuai keinginan" class="px-5 py-2 rounded-md w-full border-2 border-primary mt-2">
                             <button id="create-btn" type="button" class="hover:bg-yellow-600 duration-300 py-2 px-8 rounded-md bg-primary mt-2 w-full text-white">Shortener Sekarang</button>
                         </div>
                         <div class="w-full mt-5 hidden" id="content-hasil-shortener">
@@ -98,35 +103,86 @@
         return `${Math.random().toString(36).substr(2, 9)}`;
     }
 
+    const loading = document.getElementById("loading");
+    function setLoading(condition) {
+        if(condition) {
+            loading.classList.add("flex");
+            loading.classList.remove("hidden");
+        } else {
+            loading.classList.remove("flex");
+            loading.classList.add("hidden");
+        }
+    }
+    function setLoadingBgOpacity50(condition) {
+        if(condition) {
+            loading.classList.add("flex", "bg-opacity-50");
+            loading.classList.remove("hidden");
+        } else {
+            loading.classList.remove("flex", "bg-opacity-50");
+            loading.classList.add("hidden");
+        }
+    }
+
+    function defaultAlertError() {
+        setLoading(false);
+        setLoadingBgOpacity50(false);
+        Swal.fire({
+            title: "Error",
+            text: "Terjadi kesalahan saat mengambil data!",
+            icon: "error"
+        });
+    }
+
     import { getDatabase, ref, child, get, set, update } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
 
     const db = getDatabase();
 
     const linkInput = document.getElementById("link");
+    const customizeInput = document.getElementById("customize");
     const createButton = document.getElementById("create-btn");
     const contentHasilShortener = document.getElementById("content-hasil-shortener");
     const hasilShortener = document.getElementById("hasil-shortener");
 
     let uniqueId;
-    function addData() {
-        uniqueId = createUniqueId();
+    async function addData() {
+        setLoadingBgOpacity50(true);
+        if(customizeInput.value != "") {
+            uniqueId = customizeInput.value;
+            try{
+                const res = await getData(uniqueId);
+                if(res && res.status) {
+                    Swal.fire({
+                        title: "Terjadi Kesalahan!",
+                        text: "Url sudah digunakan!",
+                        icon: "error"
+                    });
+                    return;
+                }
+            } catch(err) {
+                defaultAlertError();
+            }
+        } else {
+            uniqueId = createUniqueId();
+        }
         set(ref(db, 'Shorteners/' + uniqueId), {
-                link: linkInput.value,
-                visit: 0
+            link: linkInput.value,
+            visit: 0
         })
         .then(() => {
+            setLoadingBgOpacity50(false);
             Swal.fire({
                 title: "Berhasil!",
-                text: "Link berhasil di shorter",
+                text: "Link berhasil di shorter!",
                 icon: "success"
             });
             contentHasilShortener.classList.remove("hidden");
             hasilShortener.value = window.location.origin + '/' + uniqueId;
         })
         .catch((err) => {
+            setLoadingBgOpacity50(false);
             Swal.fire({
                 title: "Terjadi Kesalahan!",
-                text: "Link gagal di shorter",
+                text: "Link gagal di shorter!",
                 icon: "error"
             });
             // console.log(err);
@@ -188,11 +244,14 @@
     const hasilGetInfo = document.getElementById("hasil-get-info-link");
 
     async function getInfoLink(id) {
+        setLoadingBgOpacity50(true);
         try {
             const res = await getData(id);
             if (res && res.status) {
                 hasilGetInfo.innerHTML = `Link: ${res.link}<br>Visit: ${res.visit}`;
+                setLoadingBgOpacity50(false);
             } else {
+                setLoadingBgOpacity50(false);
                 Swal.fire({
                     title: "Error",
                     text: "Link tidak ditemukan!",
@@ -200,11 +259,7 @@
                 });
             }
         } catch (error) {
-            Swal.fire({
-                title: "Error",
-                text: "Terjadi kesalahan saat mengambil data!",
-                icon: "error"
-            });
+            defaultAlertError();
         }
     }
 
@@ -226,10 +281,12 @@
     }
 
     document.addEventListener("DOMContentLoaded", async () => {
+        setLoading(true);
         const path = window.location.pathname;
         // console.log("Path:", path);
         
         if (path === "/" || path === "/index.html") {
+            setLoading(false);
             return;
         }
         
@@ -242,28 +299,16 @@
                     if(res && res.status) {
                         window.location.href = res.link;
                     } else {
-                        Swal.fire({
-                            title: "Error",
-                            text: "Terjadi kesalahan saat mengambil data!",
-                            icon: "error"
-                        });
+                        defaultAlertError();
                     }
                 } catch (error) {
-                    Swal.fire({
-                        title: "Error",
-                        text: "Terjadi kesalahan saat mengambil data!",
-                        icon: "error"
-                    });
+                    defaultAlertError();
                 }
             } else {
                 redirectTo404();
             }
         } catch (error) {
-            Swal.fire({
-                title: "Error",
-                text: "Terjadi kesalahan saat mengambil data!",
-                icon: "error"
-            });
+            defaultAlertError();
         }
     });
   </script>

@@ -8,3 +8,13 @@
     overflow-wrap: break-word; /* Menjamin kata panjang terbungkus */
     max-width: 100%; /* Membatasi lebar maksimal teks */
 }
+
+.loader {
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 8px solid black;
+    border-right-color: #F5D061;
+    animation: l2 1s infinite linear;
+}
+@keyframes l2 {to{transform: rotate(1turn)}}

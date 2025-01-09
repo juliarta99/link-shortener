@@ -151,7 +151,7 @@
             try{
                 const res = await getData(uniqueId);
                 if(res && res.status) {
-                    setLoadingBgOpacity50(true);
+                    setLoadingBgOpacity50(false);
                     Swal.fire({
                         title: "Terjadi Kesalahan!",
                         text: "Url sudah digunakan!",
@@ -230,6 +230,9 @@
     function getIdLink(url) {
         if(url) {
             try {
+                if(new URL(url).origin != window.location.origin) {
+                    return;
+                };
                 const pathSegments = new URL(url).pathname.split("/");
                 const valueAfterFirstSlash = pathSegments[1];
                 return valueAfterFirstSlash;

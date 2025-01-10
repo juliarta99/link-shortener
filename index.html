@@ -18,17 +18,17 @@
             <h1 class="text-4xl text-primary text-center font-bold mb-2">ShortLink JY</h1>
             <div class="max-w-xl border-2 border-primary w-full rounded-xl overflow-hidden mx-auto">
                 <div class="grid grid-cols-3">
-                    <button id="show-content-shortener" onclick="showShortener()" type="button" class="hover:bg-primary hover:text-white border-r-2 border-b-2 border-primary duration-300 py-2 px-8 bg-primary w-full text-white">Shortener</button>
-                    <button id="show-content-get-info-link" onclick="showGetInfo()" type="button" class="hover:bg-primary hover:text-white border-b-2 border-r-2 border-primary duration-300 py-2 px-8 bg-white w-full">Get Info</button>
-                    <button id="show-content-qr-code" onclick="showToQRCode()" type="button" class="hover:bg-primary hover:text-white border-b-2 border-primary duration-300 py-2 px-8 bg-white w-full">Generate QR Code</button>
+                    <button id="show-content-shortener" onclick="showShortener()" type="button" class="hover:bg-primary hover:text-white border-r-2 border-b-2 border-primary duration-300 py-2 px-1 text-sm sm:text-base sm:px-8 bg-primary w-full text-white">Shortener</button>
+                    <button id="show-content-get-info-link" onclick="showGetInfo()" type="button" class="hover:bg-primary hover:text-white border-b-2 border-r-2 border-primary duration-300 py-2 px-1 text-sm sm:text-base sm:px-8 bg-white w-full">Get Info</button>
+                    <button id="show-content-qr-code" onclick="showToQRCode()" type="button" class="hover:bg-primary hover:text-white border-b-2 border-primary duration-300 py-2 px-1 text-sm sm:text-base sm:px-8 bg-white w-full">Generate QR Code</button>
                 </div>
                 <div class="p-5">
                     <section id="content-shortener" class="flex flex-col items-center justify-center">
-                        <h1 class="uppercase text-2xl font-bold">Link Shortener</h1>
+                        <h1 class="uppercase text-xl md:text-2xl font-bold">Link Shortener</h1>
                         <div class="w-full mt-2">
-                            <input type="text" name="link" id="link" placeholder="Masukkan link anda" class="px-5 py-2 rounded-md w-full border-2 border-primary">
-                            <input type="text" name="customize" id="customize" placeholder="Masukkan akhiran link, jika ingin sesuai keinginan" class="px-5 py-2 rounded-md w-full border-2 border-primary mt-2">
-                            <button id="create-btn" type="button" class="hover:bg-yellow-600 duration-300 py-2 px-8 rounded-md bg-primary mt-2 w-full text-white">Shortener Sekarang</button>
+                            <input type="text" name="link" id="link" placeholder="Masukkan link anda" class="px-5 py-2 rounded-md w-full border-2 border-primary text-sm md:text-base">
+                            <input type="text" name="customize" id="customize" placeholder="Masukkan akhiran link, jika ingin sesuai keinginan" class="px-5 py-2 rounded-md w-full border-2 border-primary text-sm md:text-base mt-2">
+                            <button id="create-btn" type="button" class="hover:bg-yellow-600 duration-300 py-2 px-8 rounded-md bg-primary mt-2 w-full text-white text-sm md:text-base">Shortener Sekarang</button>
                         </div>
                         <div class="w-full mt-5 hidden" id="content-hasil-shortener">
                             <h2 class="text-lg font-semibold text-center mb-1 uppercase">Hasil Shortener</h2>
@@ -41,24 +41,24 @@
                         </div>
                     </section>
                     <section id="content-get-info-link" class="flex-col items-center justify-center hidden">
-                        <h1 class="uppercase text-2xl font-bold">Get Info Link Shortener</h1>
+                        <h1 class="uppercase text-xl md:text-2xl font-bold">Get Info Link Shortener</h1>
                         <div class="w-full mt-2">
-                            <input type="text" name="id-link" id="id-link" placeholder="Masukkan link shortener" class="px-5 py-2 rounded-md w-full border-2 border-primary">
+                            <input type="text" name="id-link" id="id-link" placeholder="Masukkan link shortener" class="px-5 py-2 rounded-md w-full border-2 border-primary text-sm md:text-base">
                             <h3 class="font-medium text-green-600 max-w-full" id="hasil-get-info-link"></h3>
-                            <button id="get-info-link-btn" type="button" class="hover:bg-yellow-600 duration-300 py-2 px-8 rounded-md bg-primary mt-2 w-full text-white">Get Info</button>
+                            <button id="get-info-link-btn" type="button" class="hover:bg-yellow-600 duration-300 py-2 px-8 rounded-md bg-primary mt-2 w-full text-white text-sm md:text-base">Get Info</button>
                         </div>
                     </section>
                     <section id="content-qr-code" class="flex-col items-center justify-center hidden">
-                        <h1 class="uppercase text-2xl font-bold">Convert To QR Code</h1>
+                        <h1 class="uppercase text-xl md:text-2xl font-bold">Convert To QR Code</h1>
                         <div class="w-full mt-2">
-                            <input type="text" name="id-link-to-qr" id="id-link-to-qr" placeholder="Masukkan link shortener" class="px-5 py-2 rounded-md w-full border-2 border-primary">
-                            <button id="link-to-qr-btn" onclick="makeCode()" type="button" class="hover:bg-yellow-600 duration-300 py-2 px-8 rounded-md bg-primary mt-2 w-full text-white">Generate</button>
+                            <input type="text" name="id-link-to-qr" id="id-link-to-qr" placeholder="Masukkan link anda" class="px-5 py-2 rounded-md w-full border-2 border-primary text-sm md:text-base">
+                            <button id="link-to-qr-btn" onclick="makeCode()" type="button" class="hover:bg-yellow-600 duration-300 py-2 px-8 rounded-md bg-primary mt-2 w-full text-white text-sm md:text-base">Generate</button>
                         </div>
                         <div class="hidden" id="hasil-qr-code-container">
                             <div class="p-5" id="qr-code-container">
                                 <div id="qrcode"></div>
                             </div>
-                            <button id="download-qr-code" onclick="downloadQRCode()" type="button" class="hover:bg-yellow-600 duration-300 py-2 px-8 rounded-md bg-primary mt-2 w-full text-white">Download</button>
+                            <button id="download-qr-code" onclick="downloadQRCode()" type="button" class="hover:bg-yellow-600 duration-300 py-2 px-8 rounded-md bg-primary mt-2 w-full text-white text-sm md:text-base">Download</button>
                         </div>
                     </section>
                 </div>
@@ -79,13 +79,14 @@
             </div>
         </div>
     </div>
-    <footer class="py-4 text-gray-500 border-t-2 border-gray-100 bg-gray-50 text-center">&copy; Juliarta & Yudhiastara 2024</footer>
+    <footer class="py-4 text-gray-500 border-t-2 border-gray-100 bg-gray-50 text-center">&copy; Juliarta & Yudhiastara 2025</footer>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://kit.fontawesome.com/4a76f15280.js" crossorigin="anonymous"></script>
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
+    import { getDatabase, ref, child, get, set, update } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
     
     const firebaseConfig = {
       apiKey: "AIzaSyD2M5qp6pjuVBELqg1XqrsP7RkBT7bBAjo",
@@ -98,6 +99,7 @@
     };
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
+    const db = getDatabase();
 
     function createUniqueId() {
         return `${Math.random().toString(36).substr(2, 9)}`;
@@ -113,6 +115,7 @@
             loading.classList.add("hidden");
         }
     }
+
     function setLoadingBgOpacity50(condition) {
         if(condition) {
             loading.classList.add("flex", "bg-opacity-50");
@@ -133,9 +136,14 @@
         });
     }
 
-    import { getDatabase, ref, child, get, set, update } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
-
-    const db = getDatabase();
+    function isValidURL(url) {
+        try {
+            new URL(url);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
 
     const linkInput = document.getElementById("link");
     const customizeInput = document.getElementById("customize");
@@ -145,49 +153,64 @@
 
     let uniqueId;
     async function addData() {
-        setLoadingBgOpacity50(true);
-        if(customizeInput.value != "") {
-            uniqueId = customizeInput.value;
-            try{
-                const res = await getData(uniqueId);
-                if(res && res.status) {
+        if(linkInput.value) {
+            if(isValidURL(linkInput.value)) {
+                setLoadingBgOpacity50(true);
+                if(customizeInput.value != "") {
+                    uniqueId = customizeInput.value;
+                    try{
+                        const res = await getData(uniqueId);
+                        if(res && res.status) {
+                            setLoadingBgOpacity50(false);
+                            Swal.fire({
+                                title: "Terjadi Kesalahan!",
+                                text: "Url sudah digunakan!",
+                                icon: "error"
+                            });
+                            return;
+                        }
+                    } catch(err) {
+                        defaultAlertError();
+                    }
+                } else {
+                    uniqueId = createUniqueId();
+                }
+                set(ref(db, 'Shorteners/' + uniqueId), {
+                    link: linkInput.value,
+                    visit: 0
+                })
+                .then(() => {
+                    setLoadingBgOpacity50(false);
+                    Swal.fire({
+                        title: "Berhasil!",
+                        text: "Link berhasil di shorter!",
+                        icon: "success"
+                    });
+                    contentHasilShortener.classList.remove("hidden");
+                    hasilShortener.value = window.location.origin + '/' + uniqueId;
+                })
+                .catch((err) => {
                     setLoadingBgOpacity50(false);
                     Swal.fire({
                         title: "Terjadi Kesalahan!",
-                        text: "Url sudah digunakan!",
+                        text: "Link gagal di shorter!",
                         icon: "error"
                     });
-                    return;
-                }
-            } catch(err) {
-                defaultAlertError();
+                })
+            } else {
+                Swal.fire({
+                    title: "Invalid Link",
+                    text: "Link yang dimasukkan tidak valid!",
+                    icon: "error"
+                });
             }
         } else {
-            uniqueId = createUniqueId();
-        }
-        set(ref(db, 'Shorteners/' + uniqueId), {
-            link: linkInput.value,
-            visit: 0
-        })
-        .then(() => {
-            setLoadingBgOpacity50(false);
-            Swal.fire({
-                title: "Berhasil!",
-                text: "Link berhasil di shorter!",
-                icon: "success"
-            });
-            contentHasilShortener.classList.remove("hidden");
-            hasilShortener.value = window.location.origin + '/' + uniqueId;
-        })
-        .catch((err) => {
-            setLoadingBgOpacity50(false);
             Swal.fire({
                 title: "Terjadi Kesalahan!",
-                text: "Link gagal di shorter!",
+                text: "Link kosong!",
                 icon: "error"
             });
-            // console.log(err);
-        })
+        }
     }
     createButton.addEventListener("click", addData);
 
@@ -207,7 +230,6 @@
                 return { status: false };
             }
         } catch (err) {
-            // console.log(err);
             return { status: false };
         }
     }
@@ -218,11 +240,9 @@
         })
         .then(() => {
             return { status: true };
-            // console.log("Update success");
         })
         .catch((err) => {
             return { status: false };
-            // console.log(err);
         })
     }
 
@@ -268,13 +288,21 @@
     }
 
     getInfoLinkBtn.addEventListener("click", function() {
-        const id = getIdLink(idLinkInput.value);
-        if (id) {
-            getInfoLink(id);
+        if(idLinkInput.value) {
+            const id = getIdLink(idLinkInput.value);
+            if (id) {
+                getInfoLink(id);
+            } else {
+                Swal.fire({
+                    title: "Invalid Link",
+                    text: "Link yang dimasukkan tidak valid!",
+                    icon: "error"
+                });
+            }
         } else {
             Swal.fire({
-                title: "Invalid Link",
-                text: "Link yang dimasukkan tidak valid!",
+                title: "Terjadi Kesalahan!",
+                text: "Link kosong!",
                 icon: "error"
             });
         }
@@ -287,7 +315,6 @@
     document.addEventListener("DOMContentLoaded", async () => {
         setLoading(true);
         const path = window.location.pathname;
-        // console.log("Path:", path);
         
         if (path === "/" || path === "/index.html") {
             setLoading(false);

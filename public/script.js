@@ -73,22 +73,37 @@ function copyHasilShortener() {
     });
 }
 
+function isValidURL(url) {
+    try {
+        new URL(url);
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
 var qrcode = new QRCode("qrcode");
 
 const containerHasilQRCode = document.getElementById("hasil-qr-code-container");
 const inputLinkQRCode = document.getElementById("id-link-to-qr");
 function makeCode () {    
-    if (!inputLinkQRCode.value) {
+    if (inputLinkQRCode.value) {
+        if(isValidURL(inputLinkQRCode.value)) {
+            containerHasilQRCode.classList.remove("hidden");
+            qrcode.makeCode(inputLinkQRCode.value);
+        } else {
+            Swal.fire({
+                title: "Invalid Link",
+                text: "Link yang dimasukkan tidak valid!",
+                icon: "error"
+            });
+        }
+    } else {
         Swal.fire({
             title: "Terjadi Kesalahan!",
             text: "Link kosong!",
             icon: "error"
         });
-        inputLinkQRCode.focus();
-        return;
     }
-    containerHasilQRCode.classList.remove("hidden");
-    qrcode.makeCode(inputLinkQRCode.value);
 }
 
 const containerQRCode = document.getElementById('qr-code-container');

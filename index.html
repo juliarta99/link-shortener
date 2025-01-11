@@ -29,8 +29,8 @@
                     <section id="content-shortener" class="flex flex-col items-center justify-center">
                         <h1 class="uppercase text-xl md:text-2xl font-bold">Link Shortener</h1>
                         <div class="w-full mt-2">
-                            <input type="text" name="link" id="link" placeholder="Masukkan link anda" class="px-5 py-2 rounded-md w-full border-2 border-primary text-sm md:text-base">
-                            <input type="text" name="customize" id="customize" placeholder="Masukkan akhiran link, jika ingin sesuai keinginan" class="px-5 py-2 rounded-md w-full border-2 border-primary text-sm md:text-base mt-2">
+                            <input type="text" name="link" id="link" placeholder="Masukkan tautan anda" class="px-5 py-2 rounded-md w-full border-2 border-primary text-sm md:text-base">
+                            <input type="text" name="customize" id="customize" placeholder="Masukkan akhiran tautan, jika ingin sesuai keinginan" class="px-5 py-2 rounded-md w-full border-2 border-primary text-sm md:text-base mt-2">
                             <button id="create-btn" type="button" class="hover:bg-yellow-600 duration-300 py-2 px-8 rounded-md bg-primary mt-2 w-full text-white text-sm md:text-base">Shortener Sekarang</button>
                         </div>
                         <div class="w-full mt-5 hidden" id="content-hasil-shortener">
@@ -46,7 +46,7 @@
                     <section id="content-get-info-link" class="flex-col items-center justify-center hidden">
                         <h1 class="uppercase text-xl md:text-2xl font-bold">Get Info Link Shortener</h1>
                         <div class="w-full mt-2">
-                            <input type="text" name="id-link" id="id-link" placeholder="Masukkan link shortener" class="px-5 py-2 rounded-md w-full border-2 border-primary text-sm md:text-base">
+                            <input type="text" name="id-link" id="id-link" placeholder="Masukkan tautan shortener" class="px-5 py-2 rounded-md w-full border-2 border-primary text-sm md:text-base">
                             <h3 class="font-medium text-green-600 max-w-full" id="hasil-get-info-link"></h3>
                             <button id="get-info-link-btn" type="button" class="hover:bg-yellow-600 duration-300 py-2 px-8 rounded-md bg-primary mt-2 w-full text-white text-sm md:text-base">Get Info</button>
                         </div>
@@ -54,7 +54,7 @@
                     <section id="content-qr-code" class="flex-col items-center justify-center hidden">
                         <h1 class="uppercase text-xl md:text-2xl font-bold">Convert To QR Code</h1>
                         <div class="w-full mt-2">
-                            <input type="text" name="id-link-to-qr" id="id-link-to-qr" placeholder="Masukkan link anda" class="px-5 py-2 rounded-md w-full border-2 border-primary text-sm md:text-base">
+                            <input type="text" name="id-link-to-qr" id="id-link-to-qr" placeholder="Masukkan tautan anda" class="px-5 py-2 rounded-md w-full border-2 border-primary text-sm md:text-base">
                             <button id="link-to-qr-btn" onclick="makeCode()" type="button" class="hover:bg-yellow-600 duration-300 py-2 px-8 rounded-md bg-primary mt-2 w-full text-white text-sm md:text-base">Generate</button>
                         </div>
                         <div class="hidden" id="hasil-qr-code-container">
@@ -68,16 +68,16 @@
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-10 gap-3">
                 <div class="rounded-xl border-2 border-primary p-5">
-                    <h1 class="text-lg text-center font-semibold">Lorem ipsum dolor sit.</h1>
-                    <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis voluptatem, tenetur obcaecati quia tempore quasi.</p>
+                    <h1 class="text-lg text-center font-semibold">Shortener</h1>
+                    <p class="text-justify">Layanan yang digunakan untuk mempersingkat tautan panjang menjadi lebih sederhana</p>
                 </div>
                 <div class="rounded-xl border-2 border-primary p-5">
-                    <h1 class="text-lg text-center font-semibold">Lorem ipsum dolor sit.</h1>
-                    <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis voluptatem, tenetur obcaecati quia tempore quasi.</p>
+                    <h1 class="text-lg text-center font-semibold">Get Info</h1>
+                    <p class="text-justify">Layanan untuk menyediakan informasi tautan sebelum dipersingkat dan jumlah pengakses tautannya</p>
                 </div>
                 <div class="rounded-xl border-2 border-primary p-5 col-span-1 sm:col-span-2 md:col-span-1">
-                    <h1 class="text-lg text-center font-semibold">Lorem ipsum dolor sit.</h1>
-                    <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis voluptatem, tenetur obcaecati quia tempore quasi.</p>
+                    <h1 class="text-lg text-center font-semibold">Generate QR Code</h1>
+                    <p class="text-justify">Layanan untuk memproses pembuatan kode QR untuk menyimpan informasi tauntan yang dapat diakses dengan mudah melalui pemindaian.</p>
                 </div>
             </div>
         </div>

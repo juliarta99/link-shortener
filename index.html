@@ -326,41 +326,39 @@
     }
 
     document.onreadystatechange = () => {
-        if (document.readyState == "complete") {
-            setLoading(false);
-        }
-    };
-
-    document.addEventListener("DOMContentLoaded", async () => {
-        setLoading(true);
-        const path = window.location.pathname;
-        
-        if (path === "/" || path === "/index.html") {
-            setLoading(false);
-            return;
-        }
-        
-        const slug = path.slice(1);
-        try {
-            const res = await getData(slug);
-            if (res && res.status) {
+        if(document.readyState == "complete") {
+            (async () => {
+                setLoading(true);
+                const path = window.location.pathname;
+                
+                if (path === "/" || path === "/index.html") {
+                    setLoading(false);
+                    return;
+                }
+                
+                const slug = path.slice(1);
                 try {
-                    const resUpdate = await updateVisitData(slug, res.visit);
-                    if(res && res.status) {
-                        window.location.href = res.link;
+                    const res = await getData(slug);
+                    if (res && res.status) {
+                        try {
+                            const resUpdate = await updateVisitData(slug, res.visit);
+                            if(res && res.status) {
+                                window.location.href = res.link;
+                            } else {
+                                defaultAlertError();
+                            }
+                        } catch (error) {
+                            defaultAlertError();
+                        }
                     } else {
-                        defaultAlertError();
+                        redirectTo404();
                     }
                 } catch (error) {
                     defaultAlertError();
                 }
-            } else {
-                redirectTo404();
-            }
-        } catch (error) {
-            defaultAlertError();
+            })();
         }
-    });
+    };
 </script>
 <script src="libs/html2canvas.min.js"></script>
 <script src="libs/qrcode.min.js"></script>
